@@ -1,0 +1,33 @@
+Modelado de los datos que ser'an persistidos en la base de datos.
+
+Existe una coleccion en la base de datos MongoDB llama "Personas" que contiene los siguientes campos:
+
+    private String id;
+
+    private DatosPersona datosPersona;
+    private Direccion direccion;
+
+A su vez esta clase creara un documento con las clase relacionadas DatosPersona y Direccion.
+
+La clase DatosPersona contiene los siguientes campos:
+
+    private String ci;
+
+    private String nombre;
+    private String apellido;
+    private int edad;
+
+Mientras que la calse Direccion contiene los siguientes campos:
+
+    private String id;
+
+    private String Departamento;
+    private String Localidad;
+    private String Calle;
+    private int Nro;
+    private String Apartamento;
+    private String Padrón;
+    private String Ruta;
+    private int Km;
+    private String Letra;
+    private String Barrio;
