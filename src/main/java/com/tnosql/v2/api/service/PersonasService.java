@@ -3,6 +3,7 @@ package com.tnosql.v2.api.service;
 import com.tnosql.v2.api.model.Personas;
 import com.tnosql.v2.api.repository.PersonasRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,6 +22,7 @@ public class PersonasService {
     }
 
     // metodo para obtener una lista de personas
+    @Cacheable("personasKche")
     public List<Personas> findAll() {
         return personasRepository.findAll();
     }

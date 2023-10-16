@@ -6,18 +6,18 @@ services:
     image: tnosql-rest:1.0
     build: .
     links:
-        - mongoRest
+        - mongorest
     ports:
       - "8080:8080"
     environment:
-        - MONGO_HOST=mongo
-        - MONGO_PORT=27017
-        - MONGO_DB=tnosql
+        - MONGO_HOST=mongorest
+        - MONGO_PORT=27018
+        - MONGO_DB=personas
         - MONGO_USER=root
         - MONGO_PASS=password
     depends_on:
-        - mongoRest
-  mongoRest:
+        - mongorest
+  mongorest:
     # docker pull mongo:7.0.2
     image: mongo
     container_name: mongorest
@@ -26,7 +26,7 @@ services:
       - MONGO_INITDB_ROOT_PASSWORD=password
     restart: unless-stopped
     ports:
-      - "27017:27017"
+      - "27018:27017"
     volumes:
       - ./database/mongodb/db:/data/db
       - ./database/mongodb/dev.archive:/Databases/dev.archive

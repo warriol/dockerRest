@@ -9,9 +9,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Data
 public class Direcciones {
 
-    @Id
-    private String ci;
-
     @Indexed
     private String Departamento;
     @Indexed
