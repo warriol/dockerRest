@@ -15,6 +15,6 @@ public class Personas {
     @Id
     private String id;
 
-    private DatosPersonas datosPersona;
-    private Direcciones direccion;
+    private DatosPersona datosPersona;
+    private Direccion direccion;
 }
