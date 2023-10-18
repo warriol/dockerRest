@@ -1,22 +1,26 @@
 version: "3.8"
 services:
-  # configuracion del servicio apache
+  # configuracion del servidor alpine
   java_app:
     container_name: java_app
     image: tnosql-rest:1.0
     build: .
     links:
         - mongorest
+        - redis
     ports:
       - "8080:8080"
     environment:
         - MONGO_HOST=mongorest
-        - MONGO_PORT=27018
-        - MONGO_DB=personas
+        - MONGO_PORT=27017
+        - MONGO_DB=tnosqlv1
         - MONGO_USER=root
         - MONGO_PASS=password
+        - REDIS_HOST=redis
+        - REDIS_PORT=6379
     depends_on:
         - mongorest
+        - redis
   mongorest:
     # docker pull mongo:7.0.2
     image: mongo
@@ -31,3 +35,8 @@ services:
       - ./database/mongodb/db:/data/db
       - ./database/mongodb/dev.archive:/Databases/dev.archive
       - ./database/mongodb/production:/Databases/production
+  redis:
+    image: redis
+    container_name: redis
+    ports:
+      - "6379:6379"

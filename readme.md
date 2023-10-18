@@ -160,6 +160,9 @@ sudo apt-get install redis
 # iniciar servicios
 sudo service redis-server start
 
+# detener servicios
+sudo service redis-server stop
+
 #conectar a redis
 redis-cli
 
