@@ -1,13 +1,13 @@
 package com.tnosql.v2.api.service;
 
 import com.tnosql.v2.api.model.Direccion;
-import com.tnosql.v2.api.repository.DatosPersonaRepository;
-import com.tnosql.v2.api.repository.DireccionRepository;
+import com.tnosql.v2.api.repository.IDatosPersonaRepository;
+import com.tnosql.v2.api.repository.IDireccionRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -16,17 +16,17 @@ public class DireccionService {
     /**
      * inyeccion de dependencias
      */
-    private final DireccionRepository direccionRepository;
+    private final IDireccionRepository IDireccionRepository;
     /**
      * inyeccion de dependencias
      */
-    private final DatosPersonaRepository datosPersonaRepository;
+    private final IDatosPersonaRepository IDatosPersonaRepository;
 
     /**
      * metodo para obtener todas las direcciones
      */
     public boolean existeCi(String ci) {
-        return datosPersonaRepository.existsById(ci);
+        return IDatosPersonaRepository.existsById(ci);
     }
 
     /**
@@ -35,7 +35,7 @@ public class DireccionService {
      */
     public boolean save(Direccion direccion) {
         if (existeCi(direccion.getCi())) {
-            direccionRepository.save(direccion);
+            IDireccionRepository.save(direccion);
             return true;
         } else {
             return false;
@@ -45,16 +45,18 @@ public class DireccionService {
     /**
      * lista direccion segun un parametro ci
      */
+    @Cacheable("direccionesCi")
     public List<Direccion> findByCi(String ci) {
-        return direccionRepository.findByCi(ci);
+        return IDireccionRepository.findByCi(ci);
     }
 
     /**
      * lista de Direcciones segun un criterio
      * argumentos: departamento, localidad, barrio
      */
+    @Cacheable("direccionesParam")
     public List<Direccion> findByDepartamentoOrLocalidadOrBarrio(String departamento, String localidad, String barrio) {
-        return direccionRepository.findByDepartamentoOrLocalidadOrBarrio(departamento, localidad, barrio);
+        return IDireccionRepository.findByDepartamentoOrLocalidadOrBarrio(departamento, localidad, barrio);
     }
 
 }

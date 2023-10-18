@@ -7,11 +7,13 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.io.Serializable;
+
 @Document(collection = "direccion")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Direccion {
+public class Direccion implements Serializable {
 
     @Id
     private String id;                      // Identificador único generado por MongoDB

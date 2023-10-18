@@ -1,7 +1,7 @@
 package com.tnosql.v2.api.service;
 
 import com.tnosql.v2.api.model.DatosPersona;
-import com.tnosql.v2.api.repository.DatosPersonaRepository;
+import com.tnosql.v2.api.repository.IDatosPersonaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -12,13 +12,13 @@ public class DatosPersonaService {
     /**
      * instancia de DatosPersonaRepository
      */
-    private final DatosPersonaRepository datosPersonaRepository;
+    private final IDatosPersonaRepository IDatosPersonaRepository;
 
     /**
      * metodo para controlar que ci no existe en la base de datos
      */
     public boolean existeCi(String ci) {
-        return datosPersonaRepository.existsById(ci);
+        return IDatosPersonaRepository.existsById(ci);
     }
 
     /**
@@ -27,7 +27,7 @@ public class DatosPersonaService {
      */
     public boolean save(DatosPersona datosPersona) {
         if (!existeCi(datosPersona.getCi())) {
-            datosPersonaRepository.save(datosPersona);
+            IDatosPersonaRepository.save(datosPersona);
             return true;
         }else {
             return false;

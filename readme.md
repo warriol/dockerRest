@@ -1,6 +1,33 @@
-# <span style="color: #10a1ff">Talle de base de datos No Sql</span>
+# <span style="color: #10a1ff">Taller de base de datos No Sql</span>
 
 Segundo laboratorio Bases de Datos NoSql 2023
+
+**Autores:**
+- Damián Vera
+- Nicolás Lepore
+- Wilson Arriola
+
+## Avance del Taller
+
+- Requisitos Funcionales Obligaotrios (API REST) <img src="https://img.shields.io/badge/ESTADO-completo-green">
+  - [x] Agregar persona
+  - [x] Agregar domicilio
+  - [x] Consultar Domicilio por CI
+  - [x] Consultar domicilio por parametros
+- Requisitos No Funcionales <img src="https://img.shields.io/badge/ESTADO-completo-green">
+  - [x] Intercambio se realiza mediante JSON
+  - [x] La base de datos principal es MongoDB
+  - [x] Modelol lógico realizado con justificativo
+  - [x] Git como herramienta de control de versiones
+  - [x] Casos de prueba en Postman
+  - [x] Lenguaje utilizado JAVA
+- Documentacion <img src="https://img.shields.io/badge/ESTADO-completo-green">
+  - [x] Swagger
+- Opcionales (al menos 2) <img src="https://img.shields.io/badge/ESTADO-en proceso-orange">
+  - [ ] Utilizar Jenkins para autamatizacion de pruebas 
+  - [ ] Dockerizar la solucion
+  - [ ] Realizar prueba de cargas contra los servicios rest y analizar rendimiento (JMeter)
+  - [x] Utilizar Redis como base de datos secundaria, justificando su inclusión en el diseño
 
 ## <span style="color: #10a1ff">--</span> Formato de intercambio de datos
 - Coleccion "Personas"
@@ -44,7 +71,7 @@ Segundo laboratorio Bases de Datos NoSql 2023
         enunciado. Esta estrategia garantiza que los campos que no son obligatorios pueden 
         estar vacíos si no se proporcionan datos para ellos.
 
-## <span style="color: #10a1ff">--</span> Instalación
+## <span style="color: #10a1ff">--</span> Instalación en Docker
   ### crear el paquete jar
    ```bash
     # limpiar la consola
@@ -104,6 +131,42 @@ Segundo laboratorio Bases de Datos NoSql 2023
         - ./database/mongodb/production:/Databases/production
   ```
 
+## <span style="color: #10a1ff">--</span> Instalación en Windows
+
+### MongoDB
+- Es necesario tener instalada la base de datos MongoDB en el equipo.
+- Adicionalmente se puede instalar su administrador, mongo compass, para facilitar la visualización de los datos.
+
+### Java
+- Es necesario tener instalado Java 17 corretto en el equipo.
+
+### Postman
+- Es necesario tener instalado Postman para realizar las pruebas de los servicios rest.
+
+### WSL 2
+- Es necesario tener instalado WSL 2 para poder ejecutar el comando `./mvnw` en la consola de windows.
+
+### Redis
+- Es necesario tener instalado Redis en el equipo.
+
+```bash
+curl -fsSL https://packages.redis.io/gpg | sudo gpg --dearmor -o /usr/share/keyrings/redis-archive-keyring.gpg
+
+echo "deb [signed-by=/usr/share/keyrings/redis-archive-keyring.gpg] https://packages.redis.io/deb $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/redis.list
+
+sudo apt-get update
+sudo apt-get install redis
+
+# iniciar servicios
+sudo service redis-server start
+
+#conectar a redis
+redis-cli
+
+#listar las claves existente
+keys *
+```
+
 ## <span style="color: #10a1ff">--</span> Bases de datos utilizadas
 
 ![Logo](https://cdn.iconscout.com/icon/free/png-512/free-redis-3-1175053.png?f=webp&w=106)
@@ -118,6 +181,9 @@ Segundo laboratorio Bases de Datos NoSql 2023
 
 ![Logo](https://cdn.iconscout.com/icon/free/png-512/free-java-57-1174929.png?f=webp&w=156)
 ![Logo](https://cdn.iconscout.com/icon/free/png-512/free-spring-16-283031.png?f=webp&w=156)
+
+## <span style="color: #10a1ff">--</span> Documentacion SWAGGER
+- /v1/swagger-ui/index.html#/
 
 ## <span style="color: #10a1ff">Requisitos funcionales de la API Rest</span>
 
@@ -214,11 +280,11 @@ Segundo laboratorio Bases de Datos NoSql 2023
 - <span style="color: #db291d">402</span> - No existe una persona con la cédula aportada como parámetro
 
 
-## - <span style="color: #1ddb2c">GET</span> Obtener domiclios
+## - <span style="color: #1ddb2c">GET</span> Obtener domicilios
     Obtener Domicilios por Criterio : Obtiene todos los domicilios asociados a un criterio
     de búsqueda, que puede ser por: Barrio, Localidad, Departamento. Los criterios se
     pueden combinar. El criterio se pasa como parámetro.
 
 ```http
-    GET /api/v1/direccion/{criterio}
+    GET /api/v1/direccion/direccion?departamento={xxxx}&localidad={xxxx}&barrio={xxxx}
 ```

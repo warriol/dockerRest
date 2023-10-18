@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface DireccionRepository extends MongoRepository<Direccion, String> {
+public interface IDireccionRepository extends MongoRepository<Direccion, String> {
 
     /**
      * lista direccion segun un parametro ci
