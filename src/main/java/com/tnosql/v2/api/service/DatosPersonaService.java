@@ -5,6 +5,8 @@ import com.tnosql.v2.api.repository.IDatosPersonaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class DatosPersonaService {
@@ -19,6 +21,13 @@ public class DatosPersonaService {
      */
     public boolean existeCi(String ci) {
         return IDatosPersonaRepository.existsById(ci);
+    }
+
+    /**
+     * metodo para obtener una lista las personas
+     */
+    public List<DatosPersona> findAll() {
+        return IDatosPersonaRepository.findAll();
     }
 
     /**

@@ -137,6 +137,14 @@ Segundo laboratorio Bases de Datos NoSql 2023
 - Es necesario tener instalada la base de datos MongoDB en el equipo.
 - Adicionalmente se puede instalar su administrador, mongo compass, para facilitar la visualización de los datos.
 
+```bash
+  # iniciar servicio mongo
+    net start MongoDB
+  
+  # detener servicio mongo
+    net stop MongoDB
+```
+
 ### Java
 - Es necesario tener instalado Java 17 corretto en el equipo.
 
@@ -291,3 +299,11 @@ keys *
 ```http
     GET /api/v1/direccion/direccion?departamento={xxxx}&localidad={xxxx}&barrio={xxxx}
 ```
+
+# <span style="color: #10a1ff">Autores</span>
+
+Lista de autores del proyecto: [participantes](https://github.com/warriol/dockerRest/graphs/contributors).
+
+<a href="https://github.com/warriol/dockerRest/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=warriol/dockerRest" width="25%"/>
+</a>

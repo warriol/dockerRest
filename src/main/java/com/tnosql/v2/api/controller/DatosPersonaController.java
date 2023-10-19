@@ -12,6 +12,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @RestController
 @RequestMapping("/api/v1")
@@ -23,6 +25,21 @@ public class DatosPersonaController {
      * instancia de DatosPersonaService
      */
     private final DatosPersonaService datosPersonaService;
+
+    /**
+     * recurso para obtener una lista de personas
+     */
+    @Operation(summary = "Obtener una lista de personas")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Lista de personas",
+            content = @io.swagger.v3.oas.annotations.media.Content(mediaType = "application/json")),
+        @ApiResponse(responseCode = "401", description = "No autorizado",
+            content = @Content)
+    })
+    @GetMapping("/personas")
+    public List<DatosPersona> findAll() {
+        return datosPersonaService.findAll();
+    }
 
     /**
      * recurso para guardar una persona
