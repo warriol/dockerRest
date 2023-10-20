@@ -5,6 +5,7 @@ spring:
       password: password
       host: localhost
       port: 27017
+      uri: mongodb://localhost:27017/tnosqlv1
     redis:
       host: localhost
       port: 6379

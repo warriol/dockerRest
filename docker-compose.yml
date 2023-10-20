@@ -19,7 +19,7 @@ services:
         - REDIS_HOST=redis
         - REDIS_PORT=6379
     depends_on:
-        - mongorest
+        - mongodb
         - redis
   mongodb:
     image: mongo:latest
@@ -36,7 +36,7 @@ services:
       - ./database/mongodb/dev.archive:/Databases/dev.archive
       - ./database/mongodb/production:/Databases/production
   redis:
-    image: redis
+    image: redis:latest
     container_name: redis
     ports:
       - "6379:6379"
