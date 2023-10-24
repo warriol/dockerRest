@@ -6,6 +6,8 @@
 
 ## iniciar servicios (Ubuntu)
 #sudo service redis-server start
+#redis-cli
+#keys *
 
 ## detener servicios
 #sudo service redis-server stop
