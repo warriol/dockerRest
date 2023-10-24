@@ -1,5 +1,5 @@
 # <span style="color: #10a1ff">Taller de base de datos No Sql</span>
-a
+
 Segundo laboratorio Bases de Datos NoSql 2023
 
 **Autores:**
