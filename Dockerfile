@@ -21,11 +21,9 @@
 ## compilar imagen
 # docker build -t tnosql-rest:1.0 .
 
-## subir a docker hub
-# docker push warriol/tnosql-rest:1.0
-
-## ejecutar contenedor basado en la imagen
-# docker run --name mi_contenedor -p 8080:8080 -e MONGO_HOST=mongorest -e MONGO_PORT=27018 -e MONGO_DB=tnosqlv1 -e MONGO_USER=root -e MONGO_PASS=password -e REDIS_HOST=redis -e REDIS_PORT=6379 -d warriol/tnosql-rest:1.0
+## correr imagen
+# docker-compose up
+# docker-compose up -d
 
 #--------------------------------------------------------------------------
 

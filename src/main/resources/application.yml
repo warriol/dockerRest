@@ -9,18 +9,17 @@ spring:
     redis:
       host: localhost
       port: 6379
-    # para docker
-#    mongodb:
+      # para docker
 #      authentication-database: admin
-#      database: tnosqlv1
-#      username: root
-#      password: password
-#      host: locahost
-#      port: 27017
+#      database: ${MONGO_DB}
+#      username: ${MONGO_USER}
+#      password: ${MONGO_PASS}
+#      host: ${MONGO_HOST}
+#      port: ${MONGO_PORT}
 #      uri: mongodb://root:password@mongodb:27017/tnosqlv1?authSource=admin
 #    redis:
 #      host: ${REDIS_HOST}
-#      port: 6379
+#      port: ${REDIS_PORT}
 # confirguacion de la ruta del swagger
 springdoc:
   swagger-ui:

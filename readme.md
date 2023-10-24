@@ -300,6 +300,13 @@ keys *
     GET /api/v1/direccion/direccion?departamento={xxxx}&localidad={xxxx}&barrio={xxxx}
 ```
 
+## TEST
+
+- primero ejecutar el teste de cedulas
+  - DatosPersonaControllerTest
+- segundo ejecutar el teste de direcciones
+  - DatosPersonaDireccionControllerTest
+
 # <span style="color: #10a1ff">Autores</span>
 
 Lista de autores del proyecto: [participantes](https://github.com/warriol/dockerRest/graphs/contributors).
