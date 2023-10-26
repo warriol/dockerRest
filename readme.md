@@ -25,8 +25,8 @@ Segundo laboratorio Bases de Datos NoSql 2023
   - [x] Swagger
 - Opcionales (al menos 2) <img src="https://img.shields.io/badge/ESTADO-en proceso-orange">
   - [ ] Utilizar Jenkins para autamatizacion de pruebas 
-  - [ ] Dockerizar la solucion
-  - [ ] Realizar prueba de cargas contra los servicios rest y analizar rendimiento (JMeter)
+  - [x] Dockerizar la solucion
+  - [x] Realizar prueba de cargas contra los servicios rest y analizar rendimiento (JMeter)
   - [x] Utilizar Redis como base de datos secundaria, justificando su inclusión en el diseño
 
 ## <span style="color: #10a1ff">--</span> Formato de intercambio de datos
