@@ -12,7 +12,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 @RestController
@@ -29,14 +31,14 @@ public class DatosPersonaController {
     /**
      * recurso para obtener una lista de personas
      */
-    @Operation(summary = "Obtener una lista de personas")
+    @Operation(summary = "Este método permite Obtener una Lista de TODAS las personas personas registradas en el sistema.")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "Lista de personas",
             content = @io.swagger.v3.oas.annotations.media.Content(mediaType = "application/json")),
         @ApiResponse(responseCode = "401", description = "No autorizado",
             content = @Content)
     })
-    @GetMapping("/personas")
+    @GetMapping("/findAll")
     public List<DatosPersona> findAll() {
         return datosPersonaService.findAll();
     }
@@ -44,21 +46,28 @@ public class DatosPersonaController {
     /**
      * recurso para guardar una persona
      */
-    @Operation(summary = "Guardar un objeto persona")
+    @Operation(summary = "Este método permite Guardar un objeto persona")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "Objeto guardado correctamente",
             content = @io.swagger.v3.oas.annotations.media.Content(mediaType = "application/json")),
         @ApiResponse(responseCode = "401", description = "La Persona ya Existe",
             content = @Content)
     })
-    @PostMapping("/personas")
+    @PostMapping("/save")
     public ResponseEntity<?> save(@RequestBody DatosPersona datosPersona) {
         boolean saved = datosPersonaService.save(datosPersona);
         if (saved) {
             return ResponseEntity.ok().build(); // HTTP 200 OK
         } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("La Persona ya Existe"); // HTTP 401 Unauthorized
+            // Crear un objeto JSON personalizado para la respuesta de error 402
+            Map<String, String> response = new HashMap<>();
+            response.put("codigo", "401");
+            response.put("estado", "error");
+            response.put("mensaje", "La Persona ya Existe");
+
+            return ResponseEntity.status(401).body(response);
         }
     }
+
 
 }

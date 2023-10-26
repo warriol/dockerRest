@@ -13,7 +13,7 @@ import java.util.Random;
 
 import static org.junit.Assert.assertEquals;
 
-public class DatosPersonaDireccionControllerTest {
+public class DatosPersonaDireccionCacheControllerTest {
 
     private RestTemplate restTemplate = new RestTemplate();
     private final String baseUrl = "http://localhost:8080/api/v1";
