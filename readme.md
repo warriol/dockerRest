@@ -74,7 +74,8 @@ Segundo laboratorio Bases de Datos NoSql 2023
 ## <span style="color: #10a1ff">--</span> Instalación en Docker
   ### crear el paquete jar
    ```bash
-    # limpiar la consola
+    # navegar a la carpeta del proyecto 
+    # limpiar target
     ./mvnw clean
     # compilar el paquete completo
     ./mvnw clean package -DskipTests
@@ -84,7 +85,7 @@ Segundo laboratorio Bases de Datos NoSql 2023
     # constuir el docker
     docker-compose build
     # iniciar el docker
-    docker-compose up
+    docker-compose up -d
    ```
 
 ## configuración Dockerfile
@@ -96,39 +97,63 @@ Segundo laboratorio Bases de Datos NoSql 2023
 
 ## configuración docker-compose
   ```bash
-  version: "3.8"
-  services:
-    # configuracion del servicio apache
-    java_app:
-      container_name: java_app
-      image: tnosql-rest:1.0
-      build: .
-      links:
-          - mongorest
-      ports:
-        - "8080:8080"
-      environment:
-          - MONGO_HOST=mongorest
-          - MONGO_PORT=27018
-          - MONGO_DB=personas
-          - MONGO_USER=root
-          - MONGO_PASS=password
-      depends_on:
-          - mongorest
-    mongorest:
-      # docker pull mongo:7.0.2
-      image: mongo
-      container_name: mongorest
-      environment:
-        - MONGO_INITDB_ROOT_USERNAME=root
-        - MONGO_INITDB_ROOT_PASSWORD=password
-      restart: unless-stopped
-      ports:
-        - "27018:27017"
-      volumes:
-        - ./database/mongodb/db:/data/db
-        - ./database/mongodb/dev.archive:/Databases/dev.archive
-        - ./database/mongodb/production:/Databases/production
+version: "3.9"
+services:
+  # configuracion del servidor alpine
+  java_app:
+    #container_name: java_app
+    image: tnosql-rest:1.0
+    ports:
+      - "8080:8080"
+    build: .
+    links:
+        - mongodb
+        - redis
+    environment:
+        - MONGO_HOST=mongodb
+        - MONGO_PORT=27017
+        - MONGO_DB=tnosqlv1
+        - MONGO_USER=root
+        - MONGO_PASS=password
+        - REDIS_HOST=redis
+        - REDIS_PORT=6380
+    depends_on:
+        - mongodb
+        - redis
+  mongodb:
+    image: mongo:7.0.2
+    container_name: mongorest
+    ports:
+      - "27017:27017"
+    restart: always
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=password
+      - MONGO_INITDB_DATABASE=tnosqlv1
+    volumes:
+      - ./database/mongodb/db:/data/db
+      - ./database/mongodb/dev.archive:/Databases/dev.archive
+      - ./database/mongodb/production:/Databases/production
+  mongo-express:
+    image: mongo-express
+    container_name: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=root
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=password
+      - ME_CONFIG_MONGODB_URL=mongodb://root:password@mongodb:27017/tnosqlv1?authSource=admin
+      - ME_CONFIG_BASICAUTH_USERNAME=mexpress
+      - ME_CONFIG_BASICAUTH_PASSWORD=mexpress
+    links:
+        - mongodb
+  redis:
+    image: redis:latest
+    container_name: redis
+    ports:
+      - "6380:6379"
+    restart: always
   ```
 
 ## <span style="color: #10a1ff">--</span> Instalación en Windows
@@ -186,12 +211,15 @@ keys *
 ## <span style="color: #10a1ff">--</span> Plataformas
 
 ![Logo](https://cdn.iconscout.com/icon/free/png-512/free-docker-11-1175228.png?f=webp&w=80)
-![Logo](https://www.docker.com/wp-content/uploads/2023/07/github-logo.svg)
+![Logo](https://assets-global.website-files.com/5f5097f276b52f2a32f9c27a/64c930b8c075c97abae3be7d_github.png?f=webp&w=80)
 
 ## <span style="color: #10a1ff">--</span> Lenguajes
 
 ![Logo](https://cdn.iconscout.com/icon/free/png-512/free-java-57-1174929.png?f=webp&w=156)
 ![Logo](https://cdn.iconscout.com/icon/free/png-512/free-spring-16-283031.png?f=webp&w=156)
+
+## <span style="color: #10a1ff">--</span> Preubas de carga
+![Logo](https://www.federico-toledo.com/wp-content/uploads/2020/02/jmeter-logo-300x150.png)
 
 ## <span style="color: #10a1ff">--</span> Documentacion SWAGGER
 - /v1/swagger-ui/index.html#/
