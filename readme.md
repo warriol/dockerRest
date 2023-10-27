@@ -71,7 +71,7 @@ Segundo laboratorio Bases de Datos NoSql 2023
         enunciado. Esta estrategia garantiza que los campos que no son obligatorios pueden 
         estar vacíos si no se proporcionan datos para ellos.
 
-## <span style="color: #10a1ff">--</span> Instalación en Docker
+## <span style="color: #10a1ff">Instalación en Docker</span> 
   ### crear el paquete jar
    ```bash
     # navegar a la carpeta del proyecto 
@@ -155,12 +155,18 @@ services:
       - "6380:6379"
     restart: always
   ```
-# Listo para iniciar la aplicación
-- Puedes utilizar nuestro swagger
+# <span style="color: #10a1ff">Listo para iniciar la aplicación Dockerizada</span>
+- Puedes utilizar nuestro swagger: <a href="http://localhost:8080/v1/swagger-ui/index.html#/">Pagina de Swagger</a>
+- Para cargar datos de prueba de personas debes correr el test DatosPersonasControllerTest
+- Para cargar datos de prueba de domicilios debes correr el test DatosPersonasDireccionControllerTest
 
-<p><a href="http://localhost:8080/v1/swagger-ui/index.html#/">Pagina de Swagger</a></p>
+### JMeter
+- En la carpeta test/java/JMeter se encuentra el archivo de configuración para realizar las pruebas de carga.
+
+### Postman
+- En la carpeta test/java/Postman se encuentra el archivo de configuración para realizar las pruebas de los servicios rest.
   
-## <span style="color: #10a1ff">--</span> Instalación en Windows
+## <span style="color: #10a1ff">Instalación en Windows</span> 
 
 ### MongoDB
 - Es necesario tener instalada la base de datos MongoDB en el equipo.
@@ -206,6 +212,7 @@ redis-cli
 #listar las claves existente
 keys *
 ```
+## <span style="color: #10a1ff">Herramientas utilizadas</span>
 
 ## <span style="color: #10a1ff">--</span> Bases de datos utilizadas
 
@@ -334,9 +341,9 @@ keys *
 
 ## TEST
 
-- primero ejecutar el teste de cedulas
+- primero ejecutar el test de cedulas
   - DatosPersonaControllerTest
-- segundo ejecutar el teste de direcciones
+- segundo ejecutar el test de direcciones
   - DatosPersonaDireccionControllerTest
 
 # <span style="color: #10a1ff">Autores</span>
