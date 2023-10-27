@@ -8,19 +8,21 @@ services:
       - "8080:8080"
     build: .
     links:
-        - mongodb
-        - redis
+      - mongodb
+      - redis
     environment:
-        - MONGO_HOST=mongodb
-        - MONGO_PORT=27017
-        - MONGO_DB=tnosqlv1
-        - MONGO_USER=root
-        - MONGO_PASS=password
-        - REDIS_HOST=redis
-        - REDIS_PORT=6380
+      - MONGO_HOST=mongodb
+      - MONGO_PORT=27017
+      - MONGO_DB=tnosqlv1
+      - MONGO_USER=root
+      - MONGO_PASS=password
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
     depends_on:
-        - mongodb
-        - redis
+      - mongodb
+      - redis
+    networks:
+      - miredDocker
   mongodb:
     image: mongo:7.0.2
     container_name: mongorest
@@ -35,6 +37,8 @@ services:
       - ./database/mongodb/db:/data/db
       - ./database/mongodb/dev.archive:/Databases/dev.archive
       - ./database/mongodb/production:/Databases/production
+    networks:
+      - miredDocker
   mongo-express:
     image: mongo-express
     container_name: mongo-express
@@ -48,10 +52,17 @@ services:
       - ME_CONFIG_BASICAUTH_USERNAME=mexpress
       - ME_CONFIG_BASICAUTH_PASSWORD=mexpress
     links:
-        - mongodb
+      - mongodb
+    networks:
+      - miredDocker
   redis:
     image: redis:latest
     container_name: redis
     ports:
-      - "6380:6379"
+      - "6379:6379"
     restart: always
+    networks:
+      - miredDocker
+networks:
+  miredDocker:
+    driver: bridge

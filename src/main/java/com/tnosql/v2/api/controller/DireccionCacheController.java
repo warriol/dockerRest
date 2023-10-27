@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
 @RestController
 @RequestMapping("/api/v1/cache")
@@ -26,6 +27,7 @@ public class DireccionCacheController {
      * instancia de DireccionService
      */
     private final DireccionCacheService direccionCacheService;
+    private static final Logger logger = Logger.getLogger(DireccionCacheController.class.getName());
 
     /**
      * recurso para obtener todas las direcciones de una persona
@@ -39,16 +41,26 @@ public class DireccionCacheController {
     })
     @GetMapping("/direccion/{ci}")
     public ResponseEntity<?> findByCi(@PathVariable String ci) {
-        List<Direccion> aretornar= direccionCacheService.findByCi(ci);
-        if(!aretornar.isEmpty()){
-            return ResponseEntity.ok(aretornar);
-        }else{
-            Map<String, String> response = new HashMap<>();
-            response.put("codigo", "402");
-            response.put("estado", "error");
-            response.put("mensaje", "No existe domicilios para la cédula aportada como parámetro");
+        try {
+            List<Direccion> aretornar= direccionCacheService.findByCi(ci);
+            if(!aretornar.isEmpty()){
+                return ResponseEntity.ok(aretornar);
+            }else{
+                Map<String, String> response = new HashMap<>();
+                response.put("codigo", "402");
+                response.put("estado", "error");
+                response.put("mensaje", "No existe domicilios para la cédula aportada como parámetro");
 
-            return ResponseEntity.status(401).body(response);
+                return ResponseEntity.status(401).body(response);
+            }
+        } catch (Exception e) {
+            // Log any exceptions
+            logger.severe("Error en findByCi: " + e.getMessage());
+            Map<String, String> response = new HashMap<>();
+            response.put("codigo", "500");
+            response.put("estado", "error");
+            response.put("mensaje",  e.getMessage());
+            return ResponseEntity.status(500).body(response);
         }
     }
 
