@@ -79,7 +79,7 @@ public class DireccionCacheController {
             @RequestParam(name = "departamento", required = false) String departamento,
             @RequestParam(name = "localidad", required = false) String localidad,
             @RequestParam(name = "barrio", required = false) String barrio) {
-        return direccionCacheService.findByDepartamentoOrLocalidadOrBarrio(departamento, localidad, barrio);
+        return direccionCacheService.findByDepartamentoAndLocalidadAndBarrio(departamento, localidad, barrio);
     }
 
 

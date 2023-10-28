@@ -87,18 +87,12 @@ public class DireccionController {
         @ApiResponse(responseCode = "402", description = "Sin resultados",
             content = @Content)
     })
-    /*@GetMapping("/direccion")
-    public List<Direccion> findByDepartamentoOrLocalidadOrBarrio(@RequestBody Direccion direccion) {
-        String departamento = (direccion.getDepartamento() != null) ? direccion.getDepartamento() : "";
-        String localidad = (direccion.getLocalidad() != null) ? direccion.getLocalidad() : "";
-        String barrio = (direccion.getBarrio() != null) ? direccion.getBarrio() : "";
-        return direccionService.findByDepartamentoOrLocalidadOrBarrio(departamento, localidad, barrio);
-    }*/
+
     @GetMapping("/direccion")
     public List<Direccion> findByDepartamentoOrLocalidadOrBarrio(
         @RequestParam(name = "departamento", required = false) String departamento,
         @RequestParam(name = "localidad", required = false) String localidad,
         @RequestParam(name = "barrio", required = false) String barrio) {
-        return direccionService.findByDepartamentoOrLocalidadOrBarrio(departamento, localidad, barrio);
+        return direccionService.findByDepartamentoAndLocalidadAndBarrio(departamento, localidad, barrio);
     }
 }
