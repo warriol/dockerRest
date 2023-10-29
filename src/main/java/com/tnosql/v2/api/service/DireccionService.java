@@ -5,15 +5,10 @@ import com.tnosql.v2.api.repository.IDatosPersonaRepository;
 import com.tnosql.v2.api.repository.IDireccionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.query.BasicQuery;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -61,29 +56,6 @@ public class DireccionService {
      * lista de Direcciones segun un criterio
      * argumentos: departamento, localidad, barrio
      */
-    /*public List<Direccion> findByDepartamentoOrLocalidadOrBarrio(String departamento, String localidad, String barrio) {
-        return IDireccionRepository.findByDepartamentoAndLocalidadAndBarrio(departamento, localidad, barrio);
-    }*/
-    /*public List<Direccion> findByDepartamentoOrLocalidadOrBarrio(String departamento, String localidad, String barrio) {
-        if (departamento != null && localidad != null && barrio != null) {
-            return IDireccionRepository.findByDepartamentoAndLocalidadAndBarrio(departamento, localidad, barrio);
-        } else if (departamento != null && localidad != null) {
-            return IDireccionRepository.findByDepartamentoAndLocalidad(departamento, localidad);
-        } else if (localidad != null && barrio != null) {
-            return IDireccionRepository.findByLocalidadAndBarrio(localidad, barrio);
-        } else if (departamento != null && barrio != null) {
-            return IDireccionRepository.findByDepartamentoAndBarrio(departamento, barrio);
-        } else if (departamento != null) {
-            return IDireccionRepository.findByDepartamento(departamento);
-        } else if (localidad != null) {
-            return IDireccionRepository.findByLocalidad(localidad);
-        } else if (barrio != null) {
-            return IDireccionRepository.findByBarrio(barrio);
-        } else {
-            return IDireccionRepository.findByBarrio(barrio);
-        }
-    }*/
-
     public List<Direccion> findByDepartamentoAndLocalidadAndBarrio(String departamento, String localidad, String barrio) {
         Criteria criteria = new Criteria();
 
@@ -100,9 +72,4 @@ public class DireccionService {
         Query query = new Query(criteria);
         return mongoTemplate.find(query, Direccion.class);
     }
-
-
-
-
-
 }

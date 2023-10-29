@@ -41,10 +41,6 @@ public class DireccionCacheService {
      * argumentos: departamento, localidad, barrio
      */
     @Cacheable("direccionesParam")
-    public List<Direccion> findByDepartamentoOrLocalidadOrBarrio(String departamento, String localidad, String barrio) {
-        return IDireccionRepository.findByDepartamentoOrLocalidadOrBarrio(departamento, localidad, barrio);
-    }
-
     public List<Direccion> findByDepartamentoAndLocalidadAndBarrio(String departamento, String localidad, String barrio) {
         Criteria criteria = new Criteria();
 

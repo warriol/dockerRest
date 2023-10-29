@@ -173,6 +173,7 @@ services:
 - Adicionalmente se puede instalar su administrador, mongo compass, para facilitar la visualización de los datos.
 
 ```bash
+  # Estos comando se escriben el PowerShell de Windows
   # iniciar servicio mongo
     net start MongoDB
   
@@ -193,24 +194,26 @@ services:
 - Es necesario tener instalado Redis en el equipo.
 
 ```bash
+# Esto comandose escriben en la consola de WSL 2
+# instalar redis
+# si ya instaló redis, no es necesario volver a instalarlo
 curl -fsSL https://packages.redis.io/gpg | sudo gpg --dearmor -o /usr/share/keyrings/redis-archive-keyring.gpg
-
 echo "deb [signed-by=/usr/share/keyrings/redis-archive-keyring.gpg] https://packages.redis.io/deb $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/redis.list
-
 sudo apt-get update
 sudo apt-get install redis
 
 # iniciar servicios
 sudo service redis-server start
 
-# detener servicios
-sudo service redis-server stop
-
 #conectar a redis
 redis-cli
 
 #listar las claves existente
 keys *
+
+# detener servicios
+sudo service redis-server stop
+
 ```
 ## <span style="color: #10a1ff">Herramientas utilizadas</span>
 

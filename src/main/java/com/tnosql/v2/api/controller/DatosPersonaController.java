@@ -8,10 +8,8 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,12 +20,10 @@ import java.util.Map;
 @RequiredArgsConstructor
 @SpringBootApplication
 public class DatosPersonaController {
-
     /**
      * instancia de DatosPersonaService
      */
     private final DatosPersonaService datosPersonaService;
-
     /**
      * recurso para obtener una lista de personas
      */
@@ -42,7 +38,6 @@ public class DatosPersonaController {
     public List<DatosPersona> findAll() {
         return datosPersonaService.findAll();
     }
-
     /**
      * recurso para guardar una persona
      */
@@ -56,18 +51,21 @@ public class DatosPersonaController {
     @PostMapping("/save")
     public ResponseEntity<?> save(@RequestBody DatosPersona datosPersona) {
         boolean saved = datosPersonaService.save(datosPersona);
+        Map<String, String> response = new HashMap<>();
+        int codigo;
         if (saved) {
-            return ResponseEntity.ok().build(); // HTTP 200 OK
+            // objeto gaurdado correctamente, status 200
+            codigo = 200;
+            response.put("codigo", "200");
+            response.put("estado", "ok");
+            response.put("mensaje", "La Persona se agregó correctamente.");
         } else {
-            // Crear un objeto JSON personalizado para la respuesta de error 402
-            Map<String, String> response = new HashMap<>();
+            // error al guardar, status 401
+            codigo = 401;
             response.put("codigo", "401");
             response.put("estado", "error");
             response.put("mensaje", "La Persona ya Existe");
-
-            return ResponseEntity.status(401).body(response);
         }
+        return ResponseEntity.status(codigo).body(response);
     }
-
-
 }

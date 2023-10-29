@@ -8,10 +8,8 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -63,7 +61,6 @@ public class DireccionCacheController {
             return ResponseEntity.status(500).body(response);
         }
     }
-
     /**
      * recurso para obtener domcilios segun criterios
      */
@@ -81,6 +78,4 @@ public class DireccionCacheController {
             @RequestParam(name = "barrio", required = false) String barrio) {
         return direccionCacheService.findByDepartamentoAndLocalidadAndBarrio(departamento, localidad, barrio);
     }
-
-
 }
