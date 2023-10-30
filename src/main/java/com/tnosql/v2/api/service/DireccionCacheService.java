@@ -2,7 +2,6 @@
 package com.tnosql.v2.api.service;
 
 import com.tnosql.v2.api.model.Direccion;
-import com.tnosql.v2.api.repository.IDatosPersonaRepository;
 import com.tnosql.v2.api.repository.IDireccionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,11 +21,8 @@ public class DireccionCacheService {
     /**
      * inyeccion de dependencias
      */
+    @Autowired
     private final IDireccionRepository IDireccionRepository;
-    /**
-     * inyeccion de dependencias
-     */
-    private final IDatosPersonaRepository IDatosPersonaRepository;
 
     /**
      * lista direccion segun un parametro ci

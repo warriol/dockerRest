@@ -31,6 +31,6 @@
 # docker login
 # docker-compose up
 FROM openjdk:17-jdk-alpine
-# Copia el código fuente de la aplicación al contenedor
+RUN apk update
 COPY target/*.jar app.jar
 ENTRYPOINT ["java","-jar","/app.jar"]

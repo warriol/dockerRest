@@ -83,7 +83,7 @@ Segundo laboratorio Bases de Datos NoSql 2023
   ### docker
    ```bash
     # constuir el docker
-    docker-compose build
+    docker build -t tnosql-rest:1.0 .
     # iniciar el docker
     docker-compose up -d
    ```
