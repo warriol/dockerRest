@@ -16,7 +16,7 @@ services:
       - MONGO_DB=tnosqlv1
       - MONGO_USER=root
       - MONGO_PASS=password
-      - REDIS_HOST=redis
+      - REDIS_HOST=redis-db
       - REDIS_PORT=6379
     depends_on:
       - mongodb
@@ -26,6 +26,7 @@ services:
   mongodb:
     image: mongo:7.0.2
     container_name: mongorest
+    hostname: mongodb
     ports:
       - "27017:27017"
     restart: always
@@ -56,14 +57,22 @@ services:
     networks:
       - miredDocker
   redis:
+    hostname: redis-db
     image: redis:latest
     container_name: redis
-    command: ["--protected-mode no"]
-    expose:
-      - "6379"
+    command: redis-server --port 6379 --bind 0.0.0.0
     ports:
       - "6379:6379"
     restart: always
+    networks:
+      - miredDocker
+  jenkins:
+    image: jenkins/jenkins:2.414.3-alpine-jdk17
+    container_name: jenkins
+    ports:
+      - "8082:8080"
+    volumes:
+      - ./jenkins_home:/var/jenkins_home
     networks:
       - miredDocker
 networks:

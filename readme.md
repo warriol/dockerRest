@@ -165,6 +165,11 @@ services:
 
 ### Postman
 - En la carpeta test/java/Postman se encuentra el archivo de configuración para realizar las pruebas de los servicios rest.
+
+### Jenkins
+- Para acceder a Jenkins ve a: http://localhost:8082/
+- usuario: admin
+- password: admin
   
 ## <span style="color: #10a1ff">Instalación en Windows</span> 
 
