@@ -1,4 +1,8 @@
+server:
+  port: 8080
 spring:
+  cache:
+    type: redis
   data:
     mongodb:
       # para localhost
@@ -12,14 +16,18 @@ spring:
       # para docker
       authentication-database: admin
       database: ${MONGO_DB}
+      server: localhost
+      port: ${MONGO_PORT}
       username: ${MONGO_USER}
       password: ${MONGO_PASS}
       host: ${MONGO_HOST}
-      port: ${MONGO_PORT}
-      #uri: mongodb://root:password@mongodb:27017/tnosqlv1?authSource=admin
+      uri: mongodb://root:password@mongodb:27017/tnosqlv1?authSource=admin
     redis:
       host: ${REDIS_HOST}
       port: ${REDIS_PORT}
+redis:
+  timeout: ${REDIS_TIMEOUT}
+  maximumActiveConnections: ${REDIS_MAX_ACTIVE}
 # confirguacion de la ruta del swagger
 springdoc:
   swagger-ui:

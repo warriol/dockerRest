@@ -1,5 +1,14 @@
 version: "3.9"
 services:
+  redis:
+    hostname: redis
+    image: redis:latest
+    container_name: redis
+    ports:
+      - "6379:6379"
+    restart: always
+    networks:
+      - miredDocker
   # configuracion del servidor alpine
   java_app:
     #container_name: java_app
@@ -16,8 +25,10 @@ services:
       - MONGO_DB=tnosqlv1
       - MONGO_USER=root
       - MONGO_PASS=password
-      - REDIS_HOST=redis-db
+      - REDIS_HOST=redis
       - REDIS_PORT=6379
+      - REDIS_TIMEOUT=1000
+      - REDIS_MAX_ACTIVE=128
     depends_on:
       - mongodb
       - redis
@@ -54,16 +65,6 @@ services:
       - ME_CONFIG_BASICAUTH_PASSWORD=mexpress
     links:
       - mongodb
-    networks:
-      - miredDocker
-  redis:
-    hostname: redis-db
-    image: redis:latest
-    container_name: redis
-    command: redis-server --port 6379 --bind 0.0.0.0
-    ports:
-      - "6379:6379"
-    restart: always
     networks:
       - miredDocker
   jenkins:
