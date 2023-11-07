@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "30a76cd7-53f0-4cf3-9b5e-a1d12b8526c1",
+		"_postman_id": "4ac6e6bc-398c-488d-b563-ef9d739af978",
 		"name": "dockerrest",
 		"description": "Lista de prueba a los ENDPOINT de la aplicación APIREST creada para el laboratorio de la materia del Tecnólogo Informático 2023: Taller de Base De Datos NoSql.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
@@ -8,368 +8,426 @@
 	},
 	"item": [
 		{
-			"name": "Save persona",
-			"event": [
+			"name": "post",
+			"item": [
 				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"\r",
-							"pm.test('Codigo de estado 200: OK', function(){\r",
-							"    pm.response.to.have.status(200);\r",
-							"});\r",
-							"\r",
-							"pm.test('Codigo de estado 401: la persona ya existe', function(){\r",
-							"    pm.response.to.have.status(401);\r",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				},
-				{
-					"listen": "prerequest",
-					"script": {
-						"exec": [
-							"pm.environment.set('cedula', '43791806');"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"ci\": {{cedula}},\r\n    \"nombre\": \"wilson\",\r\n    \"apellido\": \"arriola\",\r\n    \"edad\": 43\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{protocol}}://{{url}}/{{entorno}}/{{version}}/save",
-					"protocol": "{{protocol}}",
-					"host": [
-						"{{url}}"
-					],
-					"path": [
-						"{{entorno}}",
-						"{{version}}",
-						"save"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Save direccion",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test('Codigo de estado 200: OK', function(){\r",
-							"    pm.response.to.have.status(200);\r",
-							"});\r",
-							"\r",
-							"\r",
-							"pm.test('Codigo de estado 402: La cedula no existe', function(){\r",
-							"    pm.response.to.have.status(402);\r",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n  \"ci\": \"11111111\",\r\n  \"departamento\": \"artigas\",\r\n  \"localidad\": \"artigas\",\r\n  \"barrio\": \"string\",\r\n  \"calle\": \"string\",\r\n  \"nro\": \"string\",\r\n  \"apartamento\": \"string\",\r\n  \"padron\": \"string\",\r\n  \"ruta\": \"string\",\r\n  \"km\": 0,\r\n  \"letra\": \"string\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{protocol}}://{{url}}/{{entorno}}/{{version}}/direccion",
-					"protocol": "{{protocol}}",
-					"host": [
-						"{{url}}"
-					],
-					"path": [
-						"{{entorno}}",
-						"{{version}}",
-						"direccion"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "FindAll personas",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test('Codigo de estado 200: OK', function(){\r",
-							"    pm.response.to.have.status(200);\r",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{protocol}}://{{url}}/{{entorno}}/{{version}}/findAll",
-					"protocol": "{{protocol}}",
-					"host": [
-						"{{url}}"
-					],
-					"path": [
-						"{{entorno}}",
-						"{{version}}",
-						"findAll"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Buscar direccion por parametros",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test('Codigo de estado 200: OK', function(){\r",
-							"    pm.response.to.have.status(200);\r",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{protocol}}://{{url}}/{{entorno}}/{{version}}/direccion?departamento=montevideo",
-					"protocol": "{{protocol}}",
-					"host": [
-						"{{url}}"
-					],
-					"path": [
-						"{{entorno}}",
-						"{{version}}",
-						"direccion"
-					],
-					"query": [
+					"name": "Save persona",
+					"event": [
 						{
-							"key": "departamento",
-							"value": "montevideo"
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"pm.test('Codigo de estado 200: OK', function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"//pm.test('Codigo de estado 401: la persona ya existe', function(){\r",
+									"//    pm.response.to.have.status(401);\r",
+									"//});"
+								],
+								"type": "text/javascript"
+							}
 						},
 						{
-							"key": "localidad",
-							"value": "artigas",
-							"disabled": true
-						},
-						{
-							"key": "barrio",
-							"value": "artigas",
-							"disabled": true
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set('ci_post',  '43791806');\r",
+									"let cedula = pm.collectionVariables.get('ci_post');\r",
+									"\r",
+									"let body = {\r",
+									"    \"ci\": cedula,\r",
+									"    \"nombre\": \"wilson\",\r",
+									"    \"apellido\": \"arriola\",\r",
+									"    \"edad\": 43\r",
+									"};\r",
+									"\r",
+									"pm.collectionVariables.set('post_body', JSON.stringify(body));"
+								],
+								"type": "text/javascript"
+							}
 						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "BuscarDireccion por ci",
-			"event": [
-				{
-					"listen": "prerequest",
-					"script": {
-						"exec": [
-							"pm.environment.set('cedula', '43791806');"
-						],
-						"type": "text/javascript"
-					}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{{post_body}}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}://{{url}}/{{entorno}}/{{version}}/save",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"{{entorno}}",
+								"{{version}}",
+								"save"
+							]
+						}
+					},
+					"response": []
 				},
 				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"\r",
-							"pm.test('Codigo de estado 200: OK', function(){\r",
-							"    pm.response.to.have.status(200);\r",
-							"});\r",
-							"\r",
-							"\r",
-							"pm.test('Codigo de estado 402: no existe domicilio para la cedula', function(){\r",
-							"    pm.response.to.have.status(402);\r",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{protocol}}://{{url}}/{{entorno}}/{{version}}/direccion/{{cedula}}",
-					"protocol": "{{protocol}}",
-					"host": [
-						"{{url}}"
-					],
-					"path": [
-						"{{entorno}}",
-						"{{version}}",
-						"direccion",
-						"{{cedula}}"
-					],
-					"query": [
+					"name": "Save direccion",
+					"event": [
 						{
-							"key": "localidad",
-							"value": "artigas",
-							"disabled": true
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "CACHE: Buscar direccion por parametros",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test('Codigo de estado 200: OK', function(){\r",
-							"    pm.response.to.have.status(200);\r",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{protocol}}://{{url}}/{{entorno}}/{{version}}/cache/direccion?departamento=montevideo",
-					"protocol": "{{protocol}}",
-					"host": [
-						"{{url}}"
-					],
-					"path": [
-						"{{entorno}}",
-						"{{version}}",
-						"cache",
-						"direccion"
-					],
-					"query": [
-						{
-							"key": "departamento",
-							"value": "montevideo"
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Codigo de estado 200: OK', function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"//pm.test('Codigo de estado 402: La cedula no existe', function(){\r",
+									"//    pm.response.to.have.status(402);\r",
+									"//});"
+								],
+								"type": "text/javascript"
+							}
 						},
 						{
-							"key": "localidad",
-							"value": "artigas",
-							"disabled": true
-						},
-						{
-							"key": "barrio",
-							"value": "artigas",
-							"disabled": true
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let cedula = pm.collectionVariables.get('ci_post');\r",
+									"\r",
+									"let body = {\r",
+									"  \"ci\": cedula,\r",
+									"  \"departamento\": \"artigas\",\r",
+									"  \"localidad\": \"artigas\",\r",
+									"  \"barrio\": \"string\",\r",
+									"  \"calle\": \"string\",\r",
+									"  \"nro\": \"string\",\r",
+									"  \"apartamento\": \"string\",\r",
+									"  \"padron\": \"string\",\r",
+									"  \"ruta\": \"string\",\r",
+									"  \"km\": 0,\r",
+									"  \"letra\": \"string\"\r",
+									"};\r",
+									"\r",
+									"pm.collectionVariables.set('post_body', JSON.stringify(body));"
+								],
+								"type": "text/javascript"
+							}
 						}
-					]
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{{post_body}}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}://{{url}}/{{entorno}}/{{version}}/direccion",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"{{entorno}}",
+								"{{version}}",
+								"direccion"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		},
 		{
-			"name": "CACHE: Buscar direccion por ci",
-			"event": [
+			"name": "gets",
+			"item": [
 				{
-					"listen": "prerequest",
-					"script": {
-						"exec": [
-							"pm.environment.set('cedula', '43791806');"
-						],
-						"type": "text/javascript"
-					}
-				},
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test('Codigo de estado 200: OK', function(){\r",
-							"    pm.response.to.have.status(200);\r",
-							"});\r",
-							"\r",
-							"\r",
-							"pm.test('Codigo de estado 402: no existe domicilio para la cedula', function(){\r",
-							"    pm.response.to.have.status(402);\r",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
+					"name": "FindAll personas",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Codigo de estado 200: OK', function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
 						}
-					}
-				},
-				"url": {
-					"raw": "{{protocol}}://{{url}}/{{entorno}}/{{version}}/cache/direccion/{{cedula}}",
-					"protocol": "{{protocol}}",
-					"host": [
-						"{{url}}"
 					],
-					"path": [
-						"{{entorno}}",
-						"{{version}}",
-						"cache",
-						"direccion",
-						"{{cedula}}"
-					]
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}://{{url}}/{{entorno}}/{{version}}/findAll",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"{{entorno}}",
+								"{{version}}",
+								"findAll"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar direccion por parametros",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Codigo de estado 200: OK', function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{protocol}}://{{url}}/{{entorno}}/{{version}}/direccion",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"{{entorno}}",
+								"{{version}}",
+								"direccion"
+							],
+							"query": [
+								{
+									"key": "departamento",
+									"value": "montevideo",
+									"disabled": true
+								},
+								{
+									"key": "localidad",
+									"value": "artigas",
+									"disabled": true
+								},
+								{
+									"key": "barrio",
+									"value": "artigas",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "BuscarDireccion por ci",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"//pm.environment.set('cedula', '43791806');"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let response = pm.response.json();\r",
+									"\r",
+									"let cedula = pm.environment.get('cedula');\r",
+									"\r",
+									"pm.test('Codigo de estado 200: OK', function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"})\r",
+									"\r",
+									"pm.test('HTTP response body en campo: ci', function(){\r",
+									"    pm.expect(response[0].ci).to.eql(cedula);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{protocol}}://{{url}}/{{entorno}}/{{version}}/direccion/{{cedula}}",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"{{entorno}}",
+								"{{version}}",
+								"direccion",
+								"{{cedula}}"
+							],
+							"query": [
+								{
+									"key": "localidad",
+									"value": "artigas",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
+		},
+		{
+			"name": "cache",
+			"item": [
+				{
+					"name": "CACHE: Buscar direccion por parametros",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Codigo de estado 200: OK', function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{protocol}}://{{url}}/{{entorno}}/{{version}}/cache/direccion?departamento=artigas",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"{{entorno}}",
+								"{{version}}",
+								"cache",
+								"direccion"
+							],
+							"query": [
+								{
+									"key": "departamento",
+									"value": "artigas"
+								},
+								{
+									"key": "localidad",
+									"value": "artigas",
+									"disabled": true
+								},
+								{
+									"key": "barrio",
+									"value": "artigas",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CACHE: Buscar direccion por ci",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"//pm.environment.set('cedula', '43791806');"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let response = pm.response.json();\r",
+									"\r",
+									"let cedula = pm.environment.get('cedula');\r",
+									"\r",
+									"pm.test('Codigo de estado 200: OK', function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"})\r",
+									"\r",
+									"pm.test('HTTP response body en campo: ci', function(){\r",
+									"    pm.expect(response[0].ci).to.eql(cedula);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}://{{url}}/{{entorno}}/{{version}}/cache/direccion/{{cedula}}",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"{{entorno}}",
+								"{{version}}",
+								"cache",
+								"direccion",
+								"{{cedula}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	],
 	"event": [
@@ -400,6 +458,14 @@
 			"key": "cedula",
 			"value": "",
 			"type": "string"
+		},
+		{
+			"key": "post_body",
+			"value": ""
+		},
+		{
+			"key": "ci_post",
+			"value": ""
 		}
 	]
 }
