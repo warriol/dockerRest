@@ -88,17 +88,26 @@ Segundo laboratorio Bases de Datos NoSql 2023
     docker-compose up -d
    ```
 
-## configuración Dockerfile
+### configuración Dockerfile
    ```bash
     FROM openjdk:17-jdk-alpine
     COPY target/*.jar app.jar
     ENTRYPOINT ["java","-jar","/app.jar"]
    ```
 
-## configuración docker-compose
+### configuración docker-compose
   ```bash
 version: "3.9"
 services:
+  redis:
+    hostname: redis
+    image: redis:latest
+    container_name: redis
+    ports:
+      - "6379:6379"
+    restart: always
+    networks:
+      - miredDocker
   # configuracion del servidor alpine
   java_app:
     #container_name: java_app
@@ -107,22 +116,27 @@ services:
       - "8080:8080"
     build: .
     links:
-        - mongodb
-        - redis
+      - mongodb
+      - redis
     environment:
-        - MONGO_HOST=mongodb
-        - MONGO_PORT=27017
-        - MONGO_DB=tnosqlv1
-        - MONGO_USER=root
-        - MONGO_PASS=password
-        - REDIS_HOST=redis
-        - REDIS_PORT=6380
+      - MONGO_HOST=mongodb
+      - MONGO_PORT=27017
+      - MONGO_DB=tnosqlv1
+      - MONGO_USER=root
+      - MONGO_PASS=password
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_TIMEOUT=1000
+      - REDIS_MAX_ACTIVE=128
     depends_on:
-        - mongodb
-        - redis
+      - mongodb
+      - redis
+    networks:
+      - miredDocker
   mongodb:
     image: mongo:7.0.2
     container_name: mongorest
+    hostname: mongodb
     ports:
       - "27017:27017"
     restart: always
@@ -134,6 +148,8 @@ services:
       - ./database/mongodb/db:/data/db
       - ./database/mongodb/dev.archive:/Databases/dev.archive
       - ./database/mongodb/production:/Databases/production
+    networks:
+      - miredDocker
   mongo-express:
     image: mongo-express
     container_name: mongo-express
@@ -147,29 +163,37 @@ services:
       - ME_CONFIG_BASICAUTH_USERNAME=mexpress
       - ME_CONFIG_BASICAUTH_PASSWORD=mexpress
     links:
-        - mongodb
-  redis:
-    image: redis:latest
-    container_name: redis
+      - mongodb
+    networks:
+      - miredDocker
+  jenkins:
+    image: jenkins/jenkins:2.414.3-alpine-jdk17
+    container_name: jenkins
     ports:
-      - "6380:6379"
-    restart: always
+      - "8082:8080"
+    volumes:
+      - ./jenkins_home:/var/jenkins_home
+    networks:
+      - miredDocker
+networks:
+  miredDocker:
+    driver: bridge
   ```
-# <span style="color: #10a1ff">Listo para iniciar la aplicación Dockerizada</span>
+### <span style="color: #10a1ff">Listo para iniciar la aplicación Dockerizada</span>
 - Puedes utilizar nuestro swagger: <a href="http://localhost:8080/v1/swagger-ui/index.html#/">Pagina de Swagger</a>
 - Para cargar datos de prueba de personas debes correr el test DatosPersonasControllerTest
 - Para cargar datos de prueba de domicilios debes correr el test DatosPersonasDireccionControllerTest
 
-### JMeter
-- En la carpeta test/java/JMeter se encuentra el archivo de configuración para realizar las pruebas de carga.
+  #### JMeter
+  - En la carpeta test/java/JMeter se encuentra el archivo de configuración para realizar las pruebas de carga.
 
-### Postman
-- En la carpeta test/java/Postman se encuentra el archivo de configuración para realizar las pruebas de los servicios rest.
+  #### Postman
+  - En la carpeta test/java/Postman se encuentra el archivo de configuración para realizar las pruebas de los servicios rest.
 
-### Jenkins
-- Para acceder a Jenkins ve a: http://localhost:8082/
-- usuario: admin
-- password: admin
+  #### Jenkins
+  - Para acceder a Jenkins ve a: http://localhost:8082/
+  - usuario: admin
+  - password: admin
   
 ## <span style="color: #10a1ff">Instalación en Windows</span> 
 
